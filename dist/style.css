@@ -53,6 +53,11 @@ main {
     padding: 20px;
 }
 
+a {
+    color: blue;
+    text-decoration: none;
+}
+
 .card-body p {
     border: 1px solid gray;
     margin: 3px;
