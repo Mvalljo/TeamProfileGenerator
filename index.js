@@ -55,7 +55,7 @@ const engineerInfo = [
     {
         type: 'input',
         message: 'What is your engineers github?',
-        name: 'officeNumber',
+        name: 'github',
     },
 ]
 // Function to write HTML file
@@ -82,11 +82,36 @@ inquirer
                                 console.log(engineerAns)
                                 team.name += "," + engineerAns.name;
                                 let name = team.name;
-                                console.log(name);
                                 let names = name.split(',');
-                                console.log(names);
                                 team.name = names;
-                                console.log(team.name);
+                                team.id += "," + engineerAns.id;
+                                let id = team.id;
+                                let ids = id.split(',');
+                                team.id = ids;
+                                team.email += "," + engineerAns.email;
+                                let email = team.email;
+                                let emails = email.split(',');
+                                team.email = emails;
+                                console.log(team.github)
+                                let g = team.github;
+                                if (g === undefined) {
+                                    team.github += "," + engineerAns.github;
+                                    let github = team.github;
+                                    console.log(github);
+                                    let githubs = github.split(',');
+                                    console.log(githubs)
+                                    team.github = githubs;
+                                }else {
+                                    let githubs = "";
+                                    let git; 
+                                    git += "," + engineerAns.github;
+                                    console.log(git);
+                                    githubs = git.split(',');
+                                    console.log(githubs[1]);
+                                    g.push(githubs[1]);
+                                }
+                                
+                                console.log(team);
                                 init();
                             })
                     } else if (data.choice === "Finish building team") {

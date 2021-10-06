@@ -3,7 +3,7 @@ const Engineer = require('../lib/Engineer');
 const Intern = require('../lib/Intern');
 
 function generateHTML(team) {
-    const manager = new Manager(team.name[0], team.id, team.email, team.officeNumber);
+    const manager = new Manager(team.name[0], team.id[0], team.email[0], team.officeNumber);
 
     return `<!DOCTYPE html>
     <html lang="en">
