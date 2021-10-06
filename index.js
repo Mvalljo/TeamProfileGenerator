@@ -92,26 +92,23 @@ inquirer
                                 let email = team.email;
                                 let emails = email.split(',');
                                 team.email = emails;
-                                console.log(team.github)
                                 let g = team.github;
                                 if (g === undefined) {
                                     team.github += "," + engineerAns.github;
                                     let github = team.github;
-                                    console.log(github);
                                     let githubs = github.split(',');
-                                    console.log(githubs)
                                     team.github = githubs;
-                                }else {
+                                } else {
                                     let githubs = "";
-                                    let git; 
+                                    let git;
                                     git += "," + engineerAns.github;
-                                    console.log(git);
                                     githubs = git.split(',');
-                                    console.log(githubs[1]);
                                     g.push(githubs[1]);
+                                    var filtered = g.filter(function (el) {
+                                        return el !== 'undefined';
+                                    });
+                                    team.github = filtered;
                                 }
-                                
-                                console.log(team);
                                 init();
                             })
                     } else if (data.choice === "Finish building team") {
@@ -121,6 +118,6 @@ inquirer
                 })
         }
         for (let i = 0; i < 1; i++) {
-           init(); 
+            init();
         }
     })
