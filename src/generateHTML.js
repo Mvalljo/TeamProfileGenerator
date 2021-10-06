@@ -1,7 +1,10 @@
 const Manager = require('../lib/Manager')
+const Engineer = require('../lib/Engineer');
+const Intern = require('../lib/Intern');
 
-function generateHTML(data) {
-    const manager = new Manager(data.name,data.id,data.email,data.officeNumber);
+function generateHTML(team) {
+    const manager = new Manager(team.name[0], team.id, team.email, team.officeNumber);
+
     return `<!DOCTYPE html>
     <html lang="en">
     <head>
