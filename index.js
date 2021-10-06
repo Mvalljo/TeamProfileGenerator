@@ -2,8 +2,7 @@ const inquirer = require("inquirer")
 const fs = require('fs');
 const generateHTML = require('./src/generateHTML');
 let team;
-
-
+let count = 0;
 const managerInfo = [
     {
         type: 'input',
@@ -93,7 +92,6 @@ function writeToFile(fileName, data) {
 inquirer
     .prompt(managerInfo)
     .then((data) => {
-        console.log(data);
         team = data;
         function init() {
             inquirer
@@ -103,7 +101,6 @@ inquirer
                         inquirer
                             .prompt(engineerInfo)
                             .then((engineerAns) => {
-                                console.log(engineerAns)
                                 team.name += "," + engineerAns.name;
                                 let name = team.name;
                                 let names = name.split(',');
@@ -133,50 +130,53 @@ inquirer
                                     });
                                     team.github = filtered;
                                 }
+
                                 init();
                             })
-                    }else if (data.choice === "Intern") {
-                        inquirer
-                            .prompt(internInfo)
-                            .then((internAns) => {
-                                console.log(internAns)
-                                team.name += "," + internAns.name;
-                                let name = team.name;
-                                let names = name.split(',');
-                                team.name = names;
-                                team.id += "," + internAns.id;
-                                let id = team.id;
-                                let ids = id.split(',');
-                                team.id = ids;
-                                team.email += "," + internAns.email;
-                                let email = team.email;
-                                let emails = email.split(',');
-                                team.email = emails;
-                                let s = team.intern;
-                                if (s === undefined) {
-                                    team.school += "," + internAns.school;
-                                    let school = team.school;
-                                    let schools = school.split(',');
-                                    team.school = schools;
-                                } else {
-                                    let schools = "";
-                                    let uni;
-                                    uni += "," + internAns.school;
-                                    schools = uni.split(',');
-                                    sh.push(schools[1]);
-                                    var filteredS = sh.filter(function (elm) {
-                                        return elm !== 'undefined';
-                                    });
-                                    console.log(filteredS);
-                                    team.school = filteredS;
-                                }
-                                console.log(team.school);
-                                init();
-                            })
-                    }else if (data.choice === "Finish building team") {
+                        count = count + 1;
+                    } else if (data.choice === "Intern") {
+                        if (count === 1) {
+                            console.log("You need at least two engineers in your team!")
+                            init();
+                        } else {
+                            inquirer
+                                .prompt(internInfo)
+                                .then((internAns) => {
+                                    team.name += "," + internAns.name;
+                                    let name = team.name;
+                                    let names = name.split(',');
+                                    team.name = names;
+                                    team.id += "," + internAns.id;
+                                    let id = team.id;
+                                    let ids = id.split(',');
+                                    team.id = ids;
+                                    team.email += "," + internAns.email;
+                                    let email = team.email;
+                                    let emails = email.split(',');
+                                    team.email = emails;
+                                    let s = team.intern;
+                                    if (s === undefined) {
+                                        team.school += "," + internAns.school;
+                                        let school = team.school;
+                                        let schools = school.split(',');
+                                        team.school = schools;
+                                    } else {
+                                        let schools = "";
+                                        let uni;
+                                        uni += "," + internAns.school;
+                                        schools = uni.split(',');
+                                        sh.push(schools[1]);
+                                        var filteredS = sh.filter(function (elm) {
+                                            return elm !== 'undefined';
+                                        });
+                                        team.school = filteredS;
+                                    }
+                                    init();
+                                })
+                        }
+                    } else if (data.choice === "Finish building team") {
                         writeToFile("./dist/index.html", generateHTML(team));
                     }
-
                 })
         }
         for (let i = 0; i < 1; i++) {
