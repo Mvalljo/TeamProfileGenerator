@@ -24,6 +24,30 @@ function engineerCard(team) {
     }
 }
 
+function internCard(team) {
+    const s = team.school;
+    const g = team.github;
+    let intInfo="";
+    if (g) {
+        for (let i = g.length; i < ((s.length + g.length)-1); i++) {
+            const intern = new Intern(team.name[i+1], team.id[i+1], team.email[i+1], s[i-1]);
+            let info = `<section class="card">
+        <header>
+            <h2>${intern.getName()}</h2>
+            <p><i class="fas fa-user-graduate"></i> ${intern.getRole()}</p>
+        </header>
+        <div class="card-body">
+         <p>ID: ${intern.getId()}</p>
+         <p>Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></p>
+         <p>School: ${intern.getSchool()}</p>   
+        </div> 
+    </section>`;
+            intInfo += info;
+        }
+        return intInfo;
+    }
+}
+
 function generateHTML(team) {
     const manager = new Manager(team.name[0], team.id[0], team.email[0], team.officeNumber);
 
@@ -55,6 +79,7 @@ function generateHTML(team) {
                     </div> 
                 </section> 
                 ${engineerCard(team)} 
+                ${internCard(team)} 
             </div>
         </main>
         

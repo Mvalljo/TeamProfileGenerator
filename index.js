@@ -163,12 +163,14 @@ inquirer
                                     let uni;
                                     uni += "," + internAns.school;
                                     schools = uni.split(',');
-                                    s.push(schools[1]);
-                                    var filteredS = s.filter(function (el) {
-                                        return el !== 'undefined';
+                                    sh.push(schools[1]);
+                                    var filteredS = sh.filter(function (elm) {
+                                        return elm !== 'undefined';
                                     });
-                                    team.schools = filteredS;
+                                    console.log(filteredS);
+                                    team.school = filteredS;
                                 }
+                                console.log(team.school);
                                 init();
                             })
                     }else if (data.choice === "Finish building team") {
