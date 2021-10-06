@@ -58,6 +58,30 @@ const engineerInfo = [
         name: 'github',
     },
 ]
+
+const internInfo = [
+    {
+        type: 'input',
+        message: 'What is your interns name?',
+        name: 'name',
+    },
+    {
+        type: 'input',
+        message: 'What is your interns ID?',
+        name: 'id',
+    },
+    {
+        type: 'input',
+        message: 'What is your interns email address?',
+        name: 'email',
+    },
+    {
+        type: 'input',
+        message: 'What is your interns university?',
+        name: 'school',
+    },
+]
+
 // Function to write HTML file
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (err) =>
@@ -111,7 +135,43 @@ inquirer
                                 }
                                 init();
                             })
-                    } else if (data.choice === "Finish building team") {
+                    }else if (data.choice === "Intern") {
+                        inquirer
+                            .prompt(internInfo)
+                            .then((internAns) => {
+                                console.log(internAns)
+                                team.name += "," + internAns.name;
+                                let name = team.name;
+                                let names = name.split(',');
+                                team.name = names;
+                                team.id += "," + internAns.id;
+                                let id = team.id;
+                                let ids = id.split(',');
+                                team.id = ids;
+                                team.email += "," + internAns.email;
+                                let email = team.email;
+                                let emails = email.split(',');
+                                team.email = emails;
+                                let s = team.intern;
+                                if (s === undefined) {
+                                    team.school += "," + internAns.school;
+                                    let school = team.school;
+                                    let schools = school.split(',');
+                                    team.school = schools;
+                                } else {
+                                    let schools = "";
+                                    let uni;
+                                    uni += "," + internAns.school;
+                                    schools = uni.split(',');
+                                    s.push(schools[1]);
+                                    var filteredS = s.filter(function (el) {
+                                        return el !== 'undefined';
+                                    });
+                                    team.schools = filteredS;
+                                }
+                                init();
+                            })
+                    }else if (data.choice === "Finish building team") {
                         writeToFile("./dist/index.html", generateHTML(team));
                     }
 
