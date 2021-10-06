@@ -1,8 +1,4 @@
-const Manager = require('../lib/Manager')
-
-function generateHTML(data) {
-    const manager = new Manager(data.name,data.id,data.email,data.officeNumber);
-    return `<!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -20,19 +16,17 @@ function generateHTML(data) {
             <div class="team">
                 <section class="card">
                     <header>
-                        <h2>${manager.getName()}</h2>
-                        <p><i class="fas fa-user-tie"></i> ${manager.getRole()}</p>
+                        <h2>Alex</h2>
+                        <p><i class="fas fa-user-tie"></i> Manager</p>
                     </header>
                     <div class="card-body">
-                     <p>ID: ${manager.getId()}</p>
-                     <p>Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></p>
-                     <p>Office number: ${manager.getOfficeNumber()}</p>   
+                     <p>ID: 5612</p>
+                     <p>Email: <a href="mailto:alex@yahoo.com">alex@yahoo.com</a></p>
+                     <p>Office number: 2156524585</p>   
                     </div> 
                 </section>  
             </div>
         </main>
         
     </body>
-    </html>`;
-}
-module.exports = generateHTML;
+    </html>
