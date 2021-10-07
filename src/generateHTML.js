@@ -1,10 +1,13 @@
 const Manager = require('../lib/Manager')
 const Engineer = require('../lib/Engineer');
 const Intern = require('../lib/Intern');
+
+//Adds engineer information to html
 function engineerCard(team) {
     const g = team.github;
     let engInfo="";
     if (g) {
+        //Is going through the engineers information and putting in the appropriate place of the html
         for (let i = 0; i < g.length; i++) {
             const engineer = new Engineer(team.name[i+1], team.id[i+1], team.email[i+1], g[i]);
             let info = `<section class="card">
@@ -24,11 +27,14 @@ function engineerCard(team) {
     }
 }
 
+//Adds intern information to html
 function internCard(team) {
+    //Getting the arrays to check the length of them so the information starts in the right place
     const s = team.school;
     const g = team.github;
     let intInfo="";
     if (g) {
+        //Is going through the interns information and putting in the appropriate place of the html
         for (let i = g.length; i < ((s.length + g.length)-1); i++) {
             const intern = new Intern(team.name[i+1], team.id[i+1], team.email[i+1], s[i-1]);
             let info = `<section class="card">
@@ -48,9 +54,11 @@ function internCard(team) {
     }
 }
 
+//Gather all information given to create hmtl file
 function generateHTML(team) {
+    // gets the managers information and puts it in the appropriate place of the html
     const manager = new Manager(team.name[0], team.id[0], team.email[0], team.officeNumber);
-
+    
     const htmlDoc = `<!DOCTYPE html>
     <html lang="en">
     <head>

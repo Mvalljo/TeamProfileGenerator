@@ -3,6 +3,8 @@ const fs = require('fs');
 const generateHTML = require('./src/generateHTML');
 let team;
 let count = 0;
+
+// Array of manager information questions for user input
 const managerInfo = [
     {
         type: 'input',
@@ -26,6 +28,7 @@ const managerInfo = [
     },
 ]
 
+// Question for user input to add more employee's
 const buildTeam = [
     {
         type: 'list',
@@ -35,6 +38,7 @@ const buildTeam = [
     },
 ]
 
+// Array of engineer information questions for user input
 const engineerInfo = [
     {
         type: 'input',
@@ -58,6 +62,7 @@ const engineerInfo = [
     },
 ]
 
+// Array of intern information questions for user input
 const internInfo = [
     {
         type: 'input',
@@ -88,7 +93,7 @@ function writeToFile(fileName, data) {
     );
 }
 
-
+// generates html file with users iput given
 inquirer
     .prompt(managerInfo)
     .then((data) => {
@@ -101,6 +106,7 @@ inquirer
                         inquirer
                             .prompt(engineerInfo)
                             .then((engineerAns) => {
+                                //gets the engineers information and saves it into the appropriate array
                                 team.name += "," + engineerAns.name;
                                 let name = team.name;
                                 let names = name.split(',');
@@ -141,6 +147,7 @@ inquirer
                         } else {
                             inquirer
                                 .prompt(internInfo)
+                                //gets the interns information and saves it into the appropriate array
                                 .then((internAns) => {
                                     team.name += "," + internAns.name;
                                     let name = team.name;
@@ -155,17 +162,22 @@ inquirer
                                     let emails = email.split(',');
                                     team.email = emails;
                                     let s = team.intern;
+                                    //since the string is undefined it should add to the string from here
                                     if (s === undefined) {
                                         team.school += "," + internAns.school;
                                         let school = team.school;
+                                        //makes string into array
                                         let schools = school.split(',');
                                         team.school = schools;
                                     } else {
+                                        //continues to add to the string after the first one
                                         let schools = "";
                                         let uni;
                                         uni += "," + internAns.school;
+                                        //makes string into array
                                         schools = uni.split(',');
                                         sh.push(schools[1]);
+                                        //removes the first array string that is undefined
                                         var filteredS = sh.filter(function (elm) {
                                             return elm !== 'undefined';
                                         });
@@ -174,11 +186,13 @@ inquirer
                                     init();
                                 })
                         }
+                    //When user is finished building team then generate the hmtl
                     } else if (data.choice === "Finish building team") {
                         writeToFile("./dist/index.html", generateHTML(team));
                     }
                 })
         }
+        //initializes function init() once
         for (let i = 0; i < 1; i++) {
             init();
         }
