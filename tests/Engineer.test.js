@@ -22,7 +22,7 @@ describe ("Engineer", () =>{
     describe("getRole()", () => {
         it("should return a engineer role", () => {
             const role = 'Engineer';
-            const engineer = new Engineer('Maria',1,'maria@fakemail.com');
+            const engineer = new Engineer('Maria',1,'maria@fakemail.com',"mvalljo");
 
             expect(engineer.getRole()).toBe(role);
         })
