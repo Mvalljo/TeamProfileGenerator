@@ -10,7 +10,7 @@ Create a HTML file that include a teams basic information with a command-line ap
 - [Tests](#tests)
 - [Quesitons](#questions)
 ## Installation
-Clone the code then invoke the application by runnig node index.js in the command line.
+Clone the code then invoke the application by running node index.js in the command line after downloading the packages needed by running npm i.
 ## Usage
 After invoking applicaiton user is then presented with a series of questions to get information about users application. When all questions are answered HTML file is generated  under the dist directory.
 
